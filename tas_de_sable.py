@@ -1,10 +1,11 @@
 import tkinter
-import random as rd
+import random
 
 configuration_matrice = []
-ligne_configuration = []
+
 
 def configuration(n):
+    ligne_configuration = []
     for i in range(n):
         for j in range(n):
             ligne_configuration.append(random.randint(0,9))
