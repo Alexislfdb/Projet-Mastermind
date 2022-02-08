@@ -1,6 +1,6 @@
 import tkinter
 import random
-
+a = 5
 configuration_matrice = []
 
 
