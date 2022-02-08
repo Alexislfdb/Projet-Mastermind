@@ -1,5 +1,5 @@
 import tkinter
-import random
+import random as rd
 
 configuration_matrice = []
 ligne_configuration = []
