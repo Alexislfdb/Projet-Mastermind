@@ -5,5 +5,5 @@
 # MATTHIEU COLLE
 # Alexis LE FORESTIER
 # Flavie KUTU KIALANDA
-# https://github.com/uvsq-info/l1-python 
+# https://github.com/Alexislfdb/Projet-Mastermind
 #########################################
