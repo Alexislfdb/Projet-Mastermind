@@ -32,6 +32,7 @@ def Partie_Un_Joueur():
     for i in range(4):
         code_secret.append(random.randint(1,8)) # Génération d'un code aléatoire
 
+    
 
     rouge = canvas.create_oval((1200,100),(1250,150), fill="red")
     jaune = canvas.create_oval((1100,100),(1150,150), fill="yellow")
@@ -48,6 +49,7 @@ def Partie_Un_Joueur():
     canvas.create_oval((820,490),(840,510), fill="white")
     text_nombre_essaies = canvas.create_text(1200, 300, text=("Nombre d'essaies restants", nombre_essaies_restant), font=("helvetica", "15", "bold"),fill="white")
     text_choix = canvas.create_text(1200, 50, text=("L'ordinateur à générer un code aléatoire... Arriverez vous a le battre ?"), font=("helvetica", "15", "bold"),fill="white")
+    canvas.create_text(1480,880,text="Retour en arrière", font=("helvetica", "20", "bold"), fill="white")
     
 
     def gestion_clic_2(coordonnees):
@@ -90,6 +92,7 @@ def Partie_Un_Joueur():
             num_code = num_code + 1
             code_essaie.append(8)
         
+        
 
         if num_code == 4:
             code_temp = code_secret
@@ -130,7 +133,7 @@ def Partie_Un_Joueur():
             code_essaie = []
             if nombre_essaies_restant <= 0:
                 canvas.create_text(1200, 650, text=("Dommage..."), font=("helvetica", "80", "bold"),fill="white")
-                canvas.create_text(1200, 750, text=("Le codificateur à gagné !"), font=("helvetica", "40", "bold"),fill="white")
+                canvas.create_text(1200, 750, text=("L'ordinateur à gagné '!"), font=("helvetica", "40", "bold"),fill="white")
                 canvas.unbind("<Button-1>")
                 canvas.create_text(750, 175, text=("Le code secret était :"), font=("helvetica", "15", "bold"),fill="white")
                 for i in range(4):
@@ -150,6 +153,8 @@ def Partie_Un_Joueur():
                         canvas.create_oval((600+(i*100),250),(650+(i*100),300), fill="orange")
                     if code_secret[i] == 8:
                         canvas.create_oval((600+(i*100),250),(650+(i*100),300), fill="vert")
+                        
+            
     canvas.bind("<Button-1>", gestion_clic_2)
 
 
