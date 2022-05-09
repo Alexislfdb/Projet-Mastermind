@@ -1,10 +1,10 @@
 
-
+# On fait appel à la librairie tkinter, ainsi que la librairie random
 import tkinter as tk
 import random
 from venv import create
-# On appelle la librairie tkinter
 
+# Création de plusieurs Variables qui nous servirons plus tard
 num_code = 0
 code_secret = []
 code_essaie = []
@@ -13,6 +13,7 @@ bonne_place = 0
 bonne_couleur = 0
 
 def Mastermind():
+    # Création d'une fonction créant une fenêtre nous permettant de choisir le mode de jeu
     racine = tk.Tk()
     racine.title("Mastermind")
     bouton1 = tk.Button(racine, text="Partie 1 Joueur contre l'ordinateur", command=Partie_Un_Joueur)
@@ -22,7 +23,7 @@ def Mastermind():
     racine.mainloop()
 
 def Partie_Un_Joueur():
-
+    # Création d'une fonction nous permettant de faire une partie de Mastermind contre l'ordinateur
     racine = tk.Tk()
     racine.title("Mastermind")
     canvas = tk.Canvas(racine, bg="black", width=1600, height=900)
@@ -30,10 +31,10 @@ def Partie_Un_Joueur():
 
     Code_Secret = []
     for i in range(4):
-        code_secret.append(random.randint(1,8)) # Génération d'un code aléatoire
+        code_secret.append(random.randint(1,8)) # Génération d'un code secret aléatoire
 
     
-
+    # Création de l'interface de sélection de code de couleur
     rouge = canvas.create_oval((1200,100),(1250,150), fill="red")
     jaune = canvas.create_oval((1100,100),(1150,150), fill="yellow")
     blue = canvas.create_oval((1000,100),(1050,150), fill="blue")
@@ -43,6 +44,7 @@ def Partie_Un_Joueur():
     blanc = canvas.create_oval((1200,200),(1250,250), fill="white")
     orange = canvas.create_oval((1300,200),(1350,250), fill="#ff7f00")
 
+    # Création de différents textes apparent à différents endroits afin de donner des indications sur le jeu
     text_indice_place = canvas.create_text(1200, 400, text=("Veux dire qu'un pion est à la bonne place"), font=("helvetica", "15", "bold"),fill="white")
     canvas.create_oval((950,390),(970,410), fill="red")
     text_indice_couleur = canvas.create_text(1200, 500, text=("Veux dire qu'un pion est de la bonne couleur mais pas à la bonne place"), font=("helvetica", "15", "bold"),fill="white")
@@ -53,12 +55,12 @@ def Partie_Un_Joueur():
     
 
     def gestion_clic_2(coordonnees):
+        # Création d'une fonction qui réagit au clic sur l'écran du Mastermind
         global num_code, nombre_essaies_restant, code_essaie, bonne_couleur, bonne_place
         temp = 0
         temp2 = []
         
-
-        
+        # Les if suivant vont permettre de placé un pion de couleur en fonction de où la souris va cliquer
         if 1200 < coordonnees.x <1250 and 100 < coordonnees.y <150:
             canvas.create_oval((10+(num_code*80),10+((10 - nombre_essaies_restant)*80)),(60+(num_code*80),60+((10 - nombre_essaies_restant)*80)), fill="red")
             num_code = num_code + 1
@@ -93,22 +95,22 @@ def Partie_Un_Joueur():
             code_essaie.append(8)
         
         
-
+        # Lorsque que l'utilisateur a placé 4 pions de couleur, le code proposé par l'utilisateur est comparé au code secret de l'ordinateur
         if num_code == 4:
             code_temp = code_secret
             for i in range(4):
                 if code_essaie[i] == code_temp[i]:
                     temp2.append(code_essaie[i])
-                    bonne_place = bonne_place + 1
+                    bonne_place = bonne_place + 1 # Si un pion est à la bonne place, la variable "bonne_place" gagne +1
             for i in range(4):
                 if code_essaie[i] not in temp2:
                     if code_essaie[i] in code_temp:
                         for t in range(4):
                             if code_temp[i] == code_essaie[i]:
                                 code_temp[i] = 9 
-                        bonne_couleur = bonne_couleur + 1
+                        bonne_couleur = bonne_couleur + 1 # Si un pion est de la bonne couleur, la variable "bonne_couleur" gagne +1
             if bonne_place == 4:
-                canvas.create_text(1200, 650, text=("Félicitation !"), font=("helvetica", "80", "bold"),fill="white")
+                canvas.create_text(1200, 650, text=("Félicitation !"), font=("helvetica", "80", "bold"),fill="white") # Si l'utilisateur trouve un code identique au code secret, il a gagné
                 canvas.create_text(1200, 750, text=("Le décodeur à trouvé le code !"), font=("helvetica", "40", "bold"),fill="white")
                 canvas.unbind("<Button-1>")
 
@@ -119,19 +121,19 @@ def Partie_Un_Joueur():
 
             while bonne_place > 0:
                 temp = temp + 1
-                canvas.create_oval((350+(temp*20),30+((10 - nombre_essaies_restant)*80)),(360+(temp*20),40+((10 - nombre_essaies_restant)*80)), fill="red")
+                canvas.create_oval((350+(temp*20),30+((10 - nombre_essaies_restant)*80)),(360+(temp*20),40+((10 - nombre_essaies_restant)*80)), fill="red") # Cela va permettre d'ajouter un petit rond rouge a côté du code proposé pour chaque pion correctement placé
                 bonne_place = bonne_place - 1
 
             while bonne_couleur > 0:
                 temp = temp + 1
-                canvas.create_oval((350+(temp*20),30+((10 - nombre_essaies_restant)*80)),(360+(temp*20),40+((10 - nombre_essaies_restant)*80)), fill="white")
+                canvas.create_oval((350+(temp*20),30+((10 - nombre_essaies_restant)*80)),(360+(temp*20),40+((10 - nombre_essaies_restant)*80)), fill="white") # Cela va permettre d'ajouter un petit rond blanc a côté du code proposé pour chaque pion ayant la bonne couleur mais pas la bonne place
                 bonne_couleur = bonne_couleur - 1
             
             num_code = 0
             nombre_essaies_restant = nombre_essaies_restant - 1
             canvas.itemconfig(text_nombre_essaies, text=("Nombre d'essaies restants", nombre_essaies_restant), state="normal")
             code_essaie = []
-            if nombre_essaies_restant <= 0:
+            if nombre_essaies_restant <= 0: # Si le nombre d'essaie atteint 0, l'utilisateur à perdu
                 canvas.create_text(1200, 650, text=("Dommage..."), font=("helvetica", "80", "bold"),fill="white")
                 canvas.create_text(1200, 750, text=("L'ordinateur à gagné '!"), font=("helvetica", "40", "bold"),fill="white")
                 canvas.unbind("<Button-1>")
