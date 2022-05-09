@@ -152,7 +152,7 @@ def Partie_Un_Joueur():
                     if code_secret[i] == 7:
                         canvas.create_oval((600+(i*100),250),(650+(i*100),300), fill="orange")
                     if code_secret[i] == 8:
-                        canvas.create_oval((600+(i*100),250),(650+(i*100),300), fill="vert")
+                        canvas.create_oval((600+(i*100),250),(650+(i*100),300), fill="green")
                         
             
     canvas.bind("<Button-1>", gestion_clic_2)
