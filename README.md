@@ -1,4 +1,4 @@
-# projet_tas_de_sable
+# Projet-Mastermind
 1er projet
 #########################################
 # groupe MIASHS 7
